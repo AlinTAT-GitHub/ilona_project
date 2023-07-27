@@ -10,6 +10,20 @@
     tools:context=".MainActivity">
 
 
+    <View
+        android:id="@+id/view7"
+        android:layout_width="399dp"
+        android:layout_height="81dp"
+        android:background="@drawable/corner_layout"
+        android:backgroundTint="@color/background"
+        android:fontFamily="@font/extra_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.583"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.895" />
+
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="50dp"
@@ -23,37 +37,12 @@
         app:layout_constraintVertical_bias="0.734"
         app:srcCompat="@drawable/icon2" />
 
-    <View
-        android:id="@+id/view5"
-        android:layout_width="404dp"
-        android:layout_height="81dp"
-        android:background="@drawable/corner_layout"
-        android:backgroundTint="@color/background"
-        android:fontFamily="@font/extra_bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.285"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.906" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#B73A89"
-        android:fontFamily="@font/extra_bold"
-        android:text="Categorii"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="618dp" />
-
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/extra_bold"
-        android:text="Categoriile mele.."
+        android:text="Categoriile mele"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,20 +50,7 @@
         app:layout_constraintHorizontal_bias="0.139"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.839" />
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="108dp"
-        android:layout_height="124dp"
-        android:background="@drawable/corner_layout"
-        android:backgroundTint="@color/background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.019"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.861" />
 
     <TextView
         android:id="@+id/textView4"
@@ -162,14 +138,14 @@
         android:layout_height="32dp"
         android:fontFamily="@font/font"
         android:text="  <nume>"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.137" />
+        app:layout_constraintVertical_bias="0.123" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -207,43 +183,32 @@
 
     <View
         android:id="@+id/view3"
-        android:layout_width="404dp"
+        android:layout_width="399dp"
         android:layout_height="81dp"
         android:background="@drawable/corner_layout"
         android:backgroundTint="@color/background"
         android:fontFamily="@font/extra_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintHorizontal_bias="0.538"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.747" />
+        app:layout_constraintVertical_bias="0.746" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/extra_bold"
-        android:text="Verifica statisticile "
+        android:text="Statistici"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.698" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#27B085"
-        android:fontFamily="@font/extra_bold"
-        android:text="Statistici"
-        android:textColor="#FFFFFF"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="519dp" />
+        app:layout_constraintVertical_bias="0.722" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -251,10 +216,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintHorizontal_bias="0.903"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888"
+        app:layout_constraintVertical_bias="0.873"
         app:srcCompat="@drawable/icon1" />
 
 
