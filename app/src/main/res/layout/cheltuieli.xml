@@ -6,6 +6,30 @@
     android:layout_height="match_parent">
 
     <View
+        android:id="@+id/view15"
+        android:layout_width="395dp"
+        android:layout_height="156dp"
+        android:background="@drawable/corner_layout"
+        android:backgroundTint="#CF3333"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <View
+        android:id="@+id/view14"
+        android:layout_width="395dp"
+        android:layout_height="156dp"
+        android:background="@drawable/corner_layout"
+        android:backgroundTint="#CF3333"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.393" />
+
+    <View
         android:id="@+id/view13"
         android:layout_width="384dp"
         android:layout_height="85dp"
@@ -20,15 +44,15 @@
 
     <ImageButton
         android:id="@+id/imageButton7"
-        android:layout_width="73dp"
-        android:layout_height="64dp"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
         android:background="#3F51B5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintHorizontal_bias="0.946"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92"
+        app:layout_constraintVertical_bias="0.921"
         app:srcCompat="@android:drawable/ic_menu_zoom" />
 
     <TextView
@@ -45,19 +69,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.919" />
-
-    <View
-        android:id="@+id/view12"
-        android:layout_width="411dp"
-        android:layout_height="158dp"
-        android:background="@drawable/corner_layout"
-        android:backgroundTint="#CF3333"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.715" />
 
     <ImageButton
         android:id="@+id/imageButton6"
@@ -86,19 +97,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.657" />
-
-    <View
-        android:id="@+id/view11"
-        android:layout_width="411dp"
-        android:layout_height="158dp"
-        android:background="@drawable/corner_layout"
-        android:backgroundTint="#CF3333"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.389" />
 
     <ImageButton
         android:id="@+id/imageButton5"
@@ -130,13 +128,12 @@
 
     <View
         android:id="@+id/view10"
-        android:layout_width="411dp"
-        android:layout_height="158dp"
+        android:layout_width="395dp"
+        android:layout_height="156dp"
         android:background="@drawable/corner_layout"
         android:backgroundTint="#CF3333"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.059" />
