@@ -76,7 +76,7 @@
         app:layout_constraintVertical_bias="0.075"
         app:srcCompat="@drawable/gif1" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="238dp"
         android:layout_height="65dp"
@@ -88,34 +88,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.426" />
-
-    <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="239dp"
-        android:layout_height="62dp"
-        android:ems="10"
-        android:hint="Cod de familie"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.544" />
-
-    <EditText
-        android:id="@+id/editTextText"
-        android:layout_width="238dp"
-        android:layout_height="73dp"
-        android:ems="10"
-        android:hint="Nume Prenume"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.665" />
+        app:layout_constraintVertical_bias="0.462" />
 
     <TextView
         android:id="@+id/textView4"
@@ -133,7 +106,7 @@
         app:layout_constraintVertical_bias="0.351" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonLogIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/corner_layout"
@@ -148,7 +121,7 @@
         app:layout_constraintVertical_bias="0.773" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/buttonCreeaza"
         android:layout_width="100dp"
         android:layout_height="66dp"
         android:background="@drawable/corner_layout"
@@ -189,4 +162,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.932" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editPass"
+        android:layout_width="240dp"
+        android:layout_height="58dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.606" />
 </androidx.constraintlayout.widget.ConstraintLayout>

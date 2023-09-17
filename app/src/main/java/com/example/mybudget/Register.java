@@ -6,11 +6,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -28,6 +30,18 @@ public class Register extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressBar progressBar;
 
+    TextView textView;
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Intent intent =new Intent(getApplicationContext(),MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +52,7 @@ public class Register extends AppCompatActivity {
         mAuth=FirebaseAuth.getInstance();
         buttonReg=findViewById(R.id.creeaza_register);
         progressBar=findViewById(R.id.progressBar);
+
 
         buttonReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +72,9 @@ public class Register extends AppCompatActivity {
 
                                     Toast.makeText(Register.this, "Account created!",
                                             Toast.LENGTH_SHORT).show();
+                                    Intent intent =new Intent(getApplicationContext(),MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
 
                                 } else {
 
