@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.826" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/venit_actual"
         android:layout_width="397dp"
         android:layout_height="192dp"
         android:background="@drawable/corner_layout"
@@ -75,18 +75,18 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="378dp"
-        android:layout_height="78dp"
+        android:layout_width="380dp"
+        android:layout_height="77dp"
         android:fontFamily="@font/italic"
         android:text="Aici poti incarca venitul actual . O poti face manual sau prin scanarea extrasului bancar."
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.878"
+        app:layout_constraintHorizontal_bias="0.677"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        app:layout_constraintVertical_bias="0.451" />
 
     <TextView
         android:id="@+id/textView9"
