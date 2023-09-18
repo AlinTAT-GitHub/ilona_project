@@ -2,6 +2,7 @@ package com.example.mybudget;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -10,7 +11,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -29,6 +29,9 @@ public class Cheltuieli extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private View cheltuieli_pe_categorii;
+    private View cheltuielile_mele;
+
+    private View membrii;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,8 @@ public class Cheltuieli extends AppCompatActivity {
         setContentView(R.layout.cheltuieli);
 
         cheltuieli_pe_categorii = findViewById(R.id.view10);
+        cheltuielile_mele = findViewById(R.id.view15);
+        membrii=findViewById(R.id.view13);
 
         cheltuieli_pe_categorii.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +51,22 @@ public class Cheltuieli extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        cheltuielile_mele.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Cheltuieli.this, Cheltuielile_Mele.class);
+                startActivity(intent);
+            }
+        });
+
+        membrii.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Cheltuieli.this, Cheltuieli_Membrii.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void showAddExpenseDialog() {
@@ -60,8 +81,7 @@ public class Cheltuieli extends AppCompatActivity {
         // Inițializarea elementelor din dialog
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Spinner categoriesSpinner = dialogView.findViewById(R.id.spinner_categories);
         @SuppressLint({"MissingInflatedId", "LocalSuppress"}) EditText amountEditText = dialogView.findViewById(R.id.editText_expense_amount);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) CheckBox isFixedCheckBox = dialogView.findViewById(R.id.checkBox_fixed_expense);
-        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) CheckBox isRecurringCheckBox = dialogView.findViewById(R.id.checkBox_recurring_expense);
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) CheckBox isOccasionalCheckBox = dialogView.findViewById(R.id.checkBox_occasional_expense);
 
         // Configurarea Spinner-ului cu categoriile din Firestore
         setupCategoriesSpinner(categoriesSpinner);
@@ -71,8 +91,7 @@ public class Cheltuieli extends AppCompatActivity {
             // Obținerea valorilor din elementele dialogului
             String selectedCategory = categoriesSpinner.getSelectedItem().toString();
             String amount = amountEditText.getText().toString().trim();
-            boolean isFixed = isFixedCheckBox.isChecked();
-            boolean isRecurring = isRecurringCheckBox.isChecked();
+            boolean isOccasional = isOccasionalCheckBox.isChecked();
 
             // Validarea datelor introduse
             if (amount.isEmpty()) {
@@ -80,8 +99,8 @@ public class Cheltuieli extends AppCompatActivity {
                 return;
             }
 
-            // Salvarea cheltuielii în Firestore
-            saveExpenseToFirestore(selectedCategory, amount, isFixed, isRecurring);
+            // Salvarea cheltuielii ocazionale în Firestore
+            saveExpenseToFirestore(selectedCategory, amount, isOccasional);
 
             // Închiderea dialogului
             dialog.dismiss();
@@ -133,7 +152,7 @@ public class Cheltuieli extends AppCompatActivity {
                 });
     }
 
-    private void saveExpenseToFirestore(String category, String amount, boolean isFixed, boolean isRecurring) {
+    private void saveExpenseToFirestore(String category, String amount, boolean isOccasional) {
         // Obținerea ID-ului utilizatorului autentificat
         String uid = mAuth.getCurrentUser().getUid();
 
@@ -141,8 +160,7 @@ public class Cheltuieli extends AppCompatActivity {
         Map<String, Object> expenseData = new HashMap<>();
         expenseData.put("Categorie", category);
         expenseData.put("Suma", amount);
-        expenseData.put("CheltuialaFixa", isFixed);
-        expenseData.put("CheltuialaRepetitiva", isRecurring); // Adăugare informații despre cheltuiala repetitivă
+        expenseData.put("CheltuialaOcazionala", isOccasional); // Adăugare informații despre cheltuielile ocazionale
         expenseData.put("uid", uid);
 
         // Salvarea datelor în Firestore

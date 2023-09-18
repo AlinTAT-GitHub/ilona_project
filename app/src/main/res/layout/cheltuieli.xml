@@ -85,18 +85,18 @@
 
     <TextView
         android:id="@+id/textView17"
-        android:layout_width="318dp"
-        android:layout_height="63dp"
+        android:layout_width="314dp"
+        android:layout_height="68dp"
         android:fontFamily="@font/extra_bold"
-        android:text="Cheltuieli fixe si repetitive"
+        android:text="Lista cheltuieli fixe si ocazionale"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.172"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.657" />
+        app:layout_constraintVertical_bias="0.66" />
 
     <ImageButton
         android:id="@+id/imageButton5"

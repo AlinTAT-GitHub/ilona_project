@@ -168,7 +168,7 @@
         android:layout_width="240dp"
         android:layout_height="58dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Parola familie"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

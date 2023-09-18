@@ -23,9 +23,9 @@
         android:text="Cheltuială fixă" />
 
     <CheckBox
-        android:id="@+id/checkBox_recurring_expense"
+        android:id="@+id/checkBox_occasional_expense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cheltuială repetitivă" />
+        android:text="Cheltuială ocazionala" />
 
 </LinearLayout>

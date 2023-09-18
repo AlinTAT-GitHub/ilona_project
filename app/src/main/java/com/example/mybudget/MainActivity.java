@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     View categorii;
 
+    Button buttonLogout; // Adăugați butonul de logout
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,Categories.class);
                 startActivity(intent);
+            }
+        });
+
+        buttonLogout = findViewById(R.id.buttonlog); // Inițializați butonul de logout
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Deconectați utilizatorul și redirecționați-l către activitatea de autentificare
+                auth.signOut();
+                Intent intent = new Intent(getApplicationContext(), LogIn.class);
+                startActivity(intent);
+                finish();
             }
         });
 
