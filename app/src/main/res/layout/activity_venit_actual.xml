@@ -9,7 +9,7 @@
     tools:context=".Venit_actual">
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/editTextTextsuma"
         android:layout_width="238dp"
         android:layout_height="65dp"
         android:ems="10"
@@ -39,7 +39,7 @@
         app:layout_constraintVertical_bias="0.942" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/editTextTextnume"
         android:layout_width="240dp"
         android:layout_height="71dp"
         android:ems="10"
@@ -120,7 +120,7 @@
         app:layout_constraintVertical_bias="0.407" />
 
     <EditText
-        android:id="@+id/editTextTextdata"
+        android:id="@+id/editTextTextData"
         android:layout_width="238dp"
         android:layout_height="65dp"
         android:ems="10"

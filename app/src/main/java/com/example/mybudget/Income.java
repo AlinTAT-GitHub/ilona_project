@@ -10,6 +10,7 @@ public class Income extends AppCompatActivity {
 
     View venit_actual;
     View vizualizare;
+    View venit_fix;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +18,7 @@ public class Income extends AppCompatActivity {
 
         venit_actual=findViewById(R.id.venit_actual);
         vizualizare=findViewById(R.id.view8);
+        venit_fix=findViewById(R.id.view6);
 
         venit_actual.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,6 +34,14 @@ public class Income extends AppCompatActivity {
                 Intent intent=new Intent(Income.this,IncomeActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        venit_fix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Income.this,Venit_Fix.class);
+                startActivity(intent);
             }
         });
     }
