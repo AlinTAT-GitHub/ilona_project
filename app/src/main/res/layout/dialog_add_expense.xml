@@ -1,0 +1,31 @@
+<!-- dialog_add_expense.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/spinner_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Selectați categoria" />
+
+    <EditText
+        android:id="@+id/editText_expense_amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Suma" />
+
+    <CheckBox
+        android:id="@+id/checkBox_fixed_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheltuială fixă" />
+
+    <CheckBox
+        android:id="@+id/checkBox_recurring_expense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cheltuială repetitivă" />
+
+</LinearLayout>
