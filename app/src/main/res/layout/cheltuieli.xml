@@ -143,7 +143,7 @@
         android:layout_width="313dp"
         android:layout_height="113dp"
         android:fontFamily="@font/extra_bold"
-        android:text="Introducere cheltuieli pe categorii, manual si automat"
+        android:text="Introducere cheltuieli pe categorii"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

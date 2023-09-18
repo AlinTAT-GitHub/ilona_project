@@ -32,7 +32,7 @@ public class IncomeActivity extends AppCompatActivity {
         // Adăugarea unui TextView pentru titlu
         TextView titleTextView = new TextView(this);
         titleTextView.setText("Venituri fixe:");
-        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20); // Dimensiune mare a textului
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30); // Dimensiune mare a textului
         titleTextView.setTypeface(null, Typeface.BOLD); // Text bold
         titleTextView.setTextColor(Color.BLACK); // Culoare text negru
         titleTextView.setPadding(8, 8, 8, 16); // Padding
@@ -59,7 +59,7 @@ public class IncomeActivity extends AppCompatActivity {
 
                             // Aplicarea stilurilor direct în cod
                             textView.setText("Nume venit (fix): " + numeVenit + "\nSuma venit: " + sumaVenit + "\nDetalii: " + detalii);
-                            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16); // Setarea dimensiunii textului în sp
+                            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25); // Setarea dimensiunii textului în sp
                             textView.setTextColor(Color.BLACK); // Setarea culorii textului la negru
                             textView.setPadding(8, 8, 8, 8); // Setarea padding-ului
 
@@ -89,7 +89,7 @@ public class IncomeActivity extends AppCompatActivity {
         // Adăugarea unui TextView pentru titlu
         TextView titleTextView = new TextView(this);
         titleTextView.setText("Ultimele venituri :");
-        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20); // Dimensiune mare a textului
+        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30); // Dimensiune mare a textului
         titleTextView.setTypeface(null, Typeface.BOLD); // Text bold
         titleTextView.setTextColor(Color.BLACK); // Culoare text negru
         titleTextView.setPadding(8, 8, 8, 16); // Padding
@@ -115,7 +115,7 @@ public class IncomeActivity extends AppCompatActivity {
 
                             // Aplicarea stilurilor direct în cod
                             textView.setText("Nume venit: " + numeVenit + "\nSuma venit: " + sumaVenit + "\nDetalii: " + detalii);
-                            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16); // Setarea dimensiunii textului în sp
+                            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25); // Setarea dimensiunii textului în sp
                             textView.setTextColor(Color.BLACK); // Setarea culorii textului la negru
                             textView.setPadding(8, 8, 8, 8); // Setarea padding-ului
 

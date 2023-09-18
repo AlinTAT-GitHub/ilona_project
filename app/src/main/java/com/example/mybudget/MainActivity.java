@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     FirebaseUser user;
 
     ImageView venit;
+    ImageView cheltuieli;
+
+    View categorii;
 
 
     @Override
@@ -30,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         textView=findViewById(R.id.textView5);
+        cheltuieli=findViewById(R.id.imageView5);
+        categorii=findViewById(R.id.view7);
+
         user=auth.getCurrentUser();
         if(user==null){
             Intent intent = new Intent(getApplicationContext(), LogIn.class);
@@ -45,6 +51,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(MainActivity.this,Income.class);
+                startActivity(intent);
+            }
+        });
+
+        cheltuieli.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Cheltuieli.class);
+                startActivity(intent);
+            }
+        });
+
+        categorii.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Categories.class);
                 startActivity(intent);
             }
         });
