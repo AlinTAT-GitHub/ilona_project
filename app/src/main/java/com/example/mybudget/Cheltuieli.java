@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -30,7 +32,6 @@ public class Cheltuieli extends AppCompatActivity {
     private FirebaseFirestore db;
     private View cheltuieli_pe_categorii;
     private View cheltuielile_mele;
-
     private View membrii;
 
     @Override
@@ -40,7 +41,7 @@ public class Cheltuieli extends AppCompatActivity {
 
         cheltuieli_pe_categorii = findViewById(R.id.view10);
         cheltuielile_mele = findViewById(R.id.view15);
-        membrii=findViewById(R.id.view13);
+        membrii = findViewById(R.id.view13);
 
         cheltuieli_pe_categorii.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +163,9 @@ public class Cheltuieli extends AppCompatActivity {
         expenseData.put("Suma", amount);
         expenseData.put("CheltuialaOcazionala", isOccasional); // Adăugare informații despre cheltuielile ocazionale
         expenseData.put("uid", uid);
+
+        // Adăugarea câmpului "Data" cu data curentă în obiectul Map
+        expenseData.put("Data", FieldValue.serverTimestamp());
 
         // Salvarea datelor în Firestore
         db.collection("Cheltuieli")

@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView cheltuieli;
 
     View categorii;
+    View statistici;
 
     Button buttonLogout; // Adăugați butonul de logout
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         textView=findViewById(R.id.textView5);
         cheltuieli=findViewById(R.id.imageView5);
         categorii=findViewById(R.id.view7);
+        statistici=findViewById(R.id.view3);
 
         user=auth.getCurrentUser();
         if(user==null){
@@ -80,6 +82,15 @@ public class MainActivity extends AppCompatActivity {
                 // Deconectați utilizatorul și redirecționați-l către activitatea de autentificare
                 auth.signOut();
                 Intent intent = new Intent(getApplicationContext(), LogIn.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        statistici.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Statistics.class);
                 startActivity(intent);
                 finish();
             }
