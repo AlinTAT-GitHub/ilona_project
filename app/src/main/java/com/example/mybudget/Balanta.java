@@ -1,4 +1,5 @@
 package com.example.mybudget;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,7 +35,9 @@ public class Balanta extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String currentUserUid;
 
-    private double venitFix = 0.0;
+    private double venitFixTotal = 0.0;
+    private double cheltuieliFixeTotal = 0.0;
+    private double cheltuieliOcazionaleTotal = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,6 @@ public class Balanta extends AppCompatActivity {
 
         createMonthSpinner();
 
-        getVenitFix();
-
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
@@ -66,6 +66,9 @@ public class Balanta extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        // Obțineți venitul fix total
+        getVenitFixTotal();
     }
 
     private void createMonthSpinner() {
@@ -83,23 +86,27 @@ public class Balanta extends AppCompatActivity {
         monthSpinner.setAdapter(adapter);
     }
 
-    private void getVenitFix() {
+    private void getVenitFixTotal() {
         db.collection("Venit_Fix")
-                .document(currentUserUid)
+                .whereEqualTo("uid", currentUserUid) // Filtrați după utilizator
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if (documentSnapshot.exists()) {
-                            Double venitFixDouble = documentSnapshot.getDouble("Suma venit");
-                            if (venitFixDouble != null) {
-                                venitFix = venitFixDouble;
-                                Log.d("MyBudgetApp", "Venit fix obținut: " + venitFix);
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        venitFixTotal = 0.0; // Resetați suma venitului fix total
+
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            try {
+                                String sumaVenitString = document.getString("Suma venit");
+                                if (sumaVenitString != null) {
+                                    double venitFixDocument = Double.parseDouble(sumaVenitString);
+                                    venitFixTotal += venitFixDocument;
+                                }
+                            } catch (Exception e) {
+                                Log.e("MyBudgetApp", "Eroare la procesarea venitului fix: " + e.getMessage());
                             }
-                        } else {
-                            // Documentul "Venit_Fix" nu există pentru utilizatorul curent.
-                            Log.d("MyBudgetApp", "Documentul Venit_Fix nu există.");
                         }
+                        Log.d("MyBudgetApp", "Venit fix total obținut: " + venitFixTotal);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -119,8 +126,7 @@ public class Balanta extends AppCompatActivity {
 
         // Calcularea veniturilor
         db.collection("Venit")
-                .document(currentUserUid)
-                .collection(selectedMonth)
+                .whereEqualTo("uid", currentUserUid) // Filtrați după utilizator
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -128,36 +134,33 @@ public class Balanta extends AppCompatActivity {
                         double venitLunar = 0.0;
 
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            // Obțineți data din document
-                            Timestamp data = document.getTimestamp("Data");
-                            Log.d("MyBudgetApp", "Data venitului: " + data.toDate());
+                            try {
+                                Timestamp timestamp = document.getTimestamp("Data");
+                                Date data = timestamp.toDate();
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.setTime(data);
 
-                            // Obțineți numele venitului din document
-                            String numeVenit = document.getString("Nume venit");
-                            Log.d("MyBudgetApp", "Nume venit: " + numeVenit);
+                                int documentMonth = calendar.get(Calendar.MONTH);
+                                int documentYear = calendar.get(Calendar.YEAR);
 
-                            // Obțineți suma venitului din document
-                            String sumaVenitString = document.getString("Suma venit");
-                            Log.d("MyBudgetApp", "Suma venit: " + sumaVenitString);
+                                Calendar selectedCalendar = Calendar.getInstance();
+                                selectedCalendar.setTime(new SimpleDateFormat("MMMM yyyy", Locale.getDefault()).parse(selectedMonth));
+                                int selectedMonth = selectedCalendar.get(Calendar.MONTH);
+                                int selectedYear = selectedCalendar.get(Calendar.YEAR);
 
-                            // Verificăm dacă data din document corespunde lunii selectate
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(data.toDate());
-                            int documentMonth = calendar.get(Calendar.MONTH);
-                            int selectedMonthIndex = monthSpinner.getSelectedItemPosition();
-                            if (documentMonth == (11 - selectedMonthIndex)) {
-                                if (sumaVenitString != null) {
-                                    try {
-                                        double venit = Double.parseDouble(sumaVenitString);
-                                        venitLunar += venit;
-                                    } catch (NumberFormatException e) {
-                                        Log.e("MyBudgetApp", "Eroare la conversia sumei venitului: " + e.getMessage());
+                                if (documentMonth == selectedMonth && documentYear == selectedYear) {
+                                    String sumaVenitString = document.getString("Suma venit");
+                                    if (sumaVenitString != null) {
+                                        double venitDocument = Double.parseDouble(sumaVenitString);
+                                        venitLunar += venitDocument;
                                     }
                                 }
+                            } catch (Exception e) {
+                                Log.e("MyBudgetApp", "Eroare la procesarea venitului: " + e.getMessage());
                             }
                         }
 
-                        venitLunar += venitFix;
+                        venitLunar += venitFixTotal;
 
                         venitEditText.setText(String.valueOf(venitLunar));
                         Log.d("MyBudgetApp", "Venit lunar calculat: " + venitLunar);
@@ -171,56 +174,94 @@ public class Balanta extends AppCompatActivity {
                     }
                 });
 
-        // Calcularea cheltuielilor
+        // Calcularea cheltuielilor fixe (pe toate lunile)
         db.collection("Cheltuieli")
-                .document(currentUserUid)
-                .collection(selectedMonth)
+                .whereEqualTo("uid", currentUserUid) // Filtrați după utilizator
+                .whereEqualTo("CheltuialaOcazionala", false) // Adăugați filtrul pentru cheltuielile fixe
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        double cheltuieliLunare = 0.0;
+                        cheltuieliFixeTotal = 0.0;
 
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            // Obțineți data din document
-                            Timestamp data = document.getTimestamp("Data");
-                            Log.d("MyBudgetApp", "Data cheltuielii: " + data.toDate());
-
-                            // Obțineți numele cheltuielii din document
-                            String numeCheltuiala = document.getString("Nume cheltuiala");
-                            Log.d("MyBudgetApp", "Nume cheltuiala: " + numeCheltuiala);
-
-                            // Obțineți suma cheltuielii din document
-                            String sumaCheltuialaString = document.getString("Suma");
-                            Log.d("MyBudgetApp", "Suma cheltuielă: " + sumaCheltuialaString);
-
-                            // Verificăm dacă data din document corespunde lunii selectate
-                            Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(data.toDate());
-                            int documentMonth = calendar.get(Calendar.MONTH);
-                            int selectedMonthIndex = monthSpinner.getSelectedItemPosition();
-                            if (documentMonth == (11 - selectedMonthIndex)) {
+                            try {
+                                String sumaCheltuialaString = document.getString("Suma");
                                 if (sumaCheltuialaString != null) {
-                                    try {
-                                        double cheltuiala = Double.parseDouble(sumaCheltuialaString);
-                                        cheltuieliLunare += cheltuiala;
-                                    } catch (NumberFormatException e) {
-                                        Log.e("MyBudgetApp", "Eroare la conversia sumei cheltuielilor: " + e.getMessage());
-                                    }
+                                    double cheltuialaFixaDocument = Double.parseDouble(sumaCheltuialaString);
+                                    cheltuieliFixeTotal += cheltuialaFixaDocument;
                                 }
+                            } catch (Exception e) {
+                                Log.e("MyBudgetApp", "Eroare la procesarea cheltuielii fixe: " + e.getMessage());
                             }
                         }
 
-                        cheltuieliEditText.setText(String.valueOf(cheltuieliLunare));
-                        Log.d("MyBudgetApp", "Cheltuieli lunare calculate: " + cheltuieliLunare);
+                        cheltuieliEditText.setText(String.valueOf(cheltuieliFixeTotal));
+                        Log.d("MyBudgetApp", "Cheltuieli fixe calculate: " + cheltuieliFixeTotal);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(Balanta.this, "Eroare la obținerea cheltuielilor: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e("MyBudgetApp", "Eroare la obținerea cheltuielilor: " + e.getMessage());
+                        Toast.makeText(Balanta.this, "Eroare la obținerea cheltuielilor fixe: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("MyBudgetApp", "Eroare la obținerea cheltuielilor fixe: " + e.getMessage());
                     }
                 });
+
+        // Calcularea cheltuielilor ocazionale (doar pentru luna selectată)
+        db.collection("Cheltuieli")
+                .whereEqualTo("uid", currentUserUid) // Filtrați după utilizator
+                .whereEqualTo("CheltuialaOcazionala", true) // Adăugați filtrul pentru cheltuielile ocazionale
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        cheltuieliOcazionaleTotal = 0.0;
+
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            try {
+                                Timestamp timestamp = document.getTimestamp("Data");
+                                Date data = timestamp.toDate();
+                                Calendar calendar = Calendar.getInstance();
+                                calendar.setTime(data);
+
+                                int documentMonth = calendar.get(Calendar.MONTH);
+                                int documentYear = calendar.get(Calendar.YEAR);
+
+                                Calendar selectedCalendar = Calendar.getInstance();
+                                selectedCalendar.setTime(new SimpleDateFormat("MMMM yyyy", Locale.getDefault()).parse(selectedMonth));
+                                int selectedMonth = selectedCalendar.get(Calendar.MONTH);
+                                int selectedYear = selectedCalendar.get(Calendar.YEAR);
+
+                                if (documentMonth == selectedMonth && documentYear == selectedYear) {
+                                    String sumaCheltuialaString = document.getString("Suma");
+                                    if (sumaCheltuialaString != null) {
+                                        double cheltuialaOcazionalaDocument = Double.parseDouble(sumaCheltuialaString);
+                                        cheltuieliOcazionaleTotal += cheltuialaOcazionalaDocument;
+                                    }
+                                }
+                            } catch (Exception e) {
+                                Log.e("MyBudgetApp", "Eroare la procesarea cheltuielii ocazionale: " + e.getMessage());
+                            }
+                        }
+
+                        cheltuieliEditText.setText(String.valueOf(cheltuieliFixeTotal + cheltuieliOcazionaleTotal));
+                        Log.d("MyBudgetApp", "Cheltuieli ocazionale calculate: " + cheltuieliOcazionaleTotal);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Balanta.this, "Eroare la obținerea cheltuielilor ocazionale: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("MyBudgetApp", "Eroare la obținerea cheltuielilor ocazionale: " + e.getMessage());
+                    }
+                });
+    }
+
+
+    private String getCurrentMonth() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMMM yyyy", Locale.getDefault());
+        return dateFormat.format(calendar.getTime());
     }
 }
