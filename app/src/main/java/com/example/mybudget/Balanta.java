@@ -1,5 +1,6 @@
 package com.example.mybudget;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,22 +9,32 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.github.mikephil.charting.data.BarData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+
+
+
 
 public class Balanta extends AppCompatActivity {
 
@@ -36,8 +47,13 @@ public class Balanta extends AppCompatActivity {
     private String currentUserUid;
 
     private double venitFixTotal = 0.0;
+
+    private double venitL=0.0;
     private double cheltuieliFixeTotal = 0.0;
     private double cheltuieliOcazionaleTotal = 0.0;
+    private String selectedMonth;
+
+    private BarChart barChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +68,20 @@ public class Balanta extends AppCompatActivity {
         venitEditText = findViewById(R.id.editTextText);
         cheltuieliEditText = findViewById(R.id.editTextText3);
 
+        barChart = findViewById(R.id.barChart);
+
+
+
         createMonthSpinner();
 
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                String selectedMonth = (String) adapterView.getItemAtPosition(position);
+                selectedMonth = (String) adapterView.getItemAtPosition(position);
                 Log.d("MyBudgetApp", "Luna selectată: " + selectedMonth);
+
                 calculateBalanceForMonth(selectedMonth);
+
             }
 
             @Override
@@ -69,7 +91,41 @@ public class Balanta extends AppCompatActivity {
 
         // Obțineți venitul fix total
         getVenitFixTotal();
+        setupBarChart();
     }
+
+
+    private BarDataSet createBarDataSet(String label, float value, int color, int position) {
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        entries.add(new BarEntry(position, value));
+        BarDataSet dataSet = new BarDataSet(entries, label);
+        dataSet.setColor(color);
+        return dataSet;
+    }
+
+    private void setupBarChart() {
+        barChart.setDrawBarShadow(false);
+        barChart.setDrawValueAboveBar(true);
+        barChart.getDescription().setEnabled(false);
+
+        // Create an empty data set for the bar chart
+        BarData data = new BarData();
+
+        BarDataSet venitDataSet = createBarDataSet("Venit", 100f, Color.parseColor("#0F9D58"), 0); // Exemplu de valoare pentru venit (100f) și culoare verde, poziția 0
+        BarDataSet cheltuieliDataSet = createBarDataSet("Cheltuieli", 50f, Color.parseColor("#2196F3"), 1); // Exemplu de valoare pentru cheltuieli (50f) și culoare albastră, poziția 1
+
+        data.addDataSet(venitDataSet);
+        data.addDataSet(cheltuieliDataSet);
+
+        // Customize the appearance of the bar chart (labels, axis, etc.)
+        // Puteți personaliza în continuare aspectul după cum doriți
+
+        barChart.setData(data);
+        barChart.invalidate(); // Reîmprospătați diagrama pentru a afișa datele goale inițiale
+    }
+
+
+
 
     private void createMonthSpinner() {
         List<String> months = new ArrayList<>();
@@ -119,9 +175,12 @@ public class Balanta extends AppCompatActivity {
     }
 
     private void calculateBalanceForMonth(final String selectedMonth) {
+
+
+        Log.d("MyBudgetApp", "Calculare pentru luna selectată: " + selectedMonth);
+
         venitEditText.setText("");
         cheltuieliEditText.setText("");
-
         Log.d("MyBudgetApp", "Calculare pentru luna selectată: " + selectedMonth);
 
         // Calcularea veniturilor
@@ -154,16 +213,23 @@ public class Balanta extends AppCompatActivity {
                                         double venitDocument = Double.parseDouble(sumaVenitString);
                                         venitLunar += venitDocument;
                                     }
+
                                 }
+
                             } catch (Exception e) {
                                 Log.e("MyBudgetApp", "Eroare la procesarea venitului: " + e.getMessage());
                             }
                         }
 
                         venitLunar += venitFixTotal;
+                        venitL=venitLunar;
+
 
                         venitEditText.setText(String.valueOf(venitLunar));
                         Log.d("MyBudgetApp", "Venit lunar calculat: " + venitLunar);
+
+                        updateChart();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -173,7 +239,6 @@ public class Balanta extends AppCompatActivity {
                         Log.e("MyBudgetApp", "Eroare la obținerea veniturilor: " + e.getMessage());
                     }
                 });
-
         // Calcularea cheltuielilor fixe (pe toate lunile)
         db.collection("Cheltuieli")
                 .whereEqualTo("uid", currentUserUid) // Filtrați după utilizator
@@ -191,6 +256,7 @@ public class Balanta extends AppCompatActivity {
                                     double cheltuialaFixaDocument = Double.parseDouble(sumaCheltuialaString);
                                     cheltuieliFixeTotal += cheltuialaFixaDocument;
                                 }
+                                updateChart();
                             } catch (Exception e) {
                                 Log.e("MyBudgetApp", "Eroare la procesarea cheltuielii fixe: " + e.getMessage());
                             }
@@ -240,6 +306,8 @@ public class Balanta extends AppCompatActivity {
                                         cheltuieliOcazionaleTotal += cheltuialaOcazionalaDocument;
                                     }
                                 }
+                                updateChart();
+
                             } catch (Exception e) {
                                 Log.e("MyBudgetApp", "Eroare la procesarea cheltuielii ocazionale: " + e.getMessage());
                             }
@@ -248,6 +316,9 @@ public class Balanta extends AppCompatActivity {
                         cheltuieliEditText.setText(String.valueOf(cheltuieliFixeTotal + cheltuieliOcazionaleTotal));
                         Log.d("MyBudgetApp", "Cheltuieli ocazionale calculate: " + cheltuieliOcazionaleTotal);
                     }
+
+
+
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -256,6 +327,18 @@ public class Balanta extends AppCompatActivity {
                         Log.e("MyBudgetApp", "Eroare la obținerea cheltuielilor ocazionale: " + e.getMessage());
                     }
                 });
+
+
+
+
+
+    }
+    private void updateChart() {
+        BarData data = new BarData();
+        data.addDataSet(createBarDataSet("Venit", (float) venitL, Color.parseColor("#0F9D58"), 0));
+        data.addDataSet(createBarDataSet("Cheltuieli", (float) (cheltuieliFixeTotal + cheltuieliOcazionaleTotal), Color.parseColor("#2196F3"), 1));
+        barChart.setData(data);
+        barChart.invalidate();
     }
 
 

@@ -38,6 +38,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.2.2'
     implementation 'com.google.firebase:firebase-auth:22.1.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.8.1'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+
+
 
 
     testImplementation 'junit:junit:4.13.2'
