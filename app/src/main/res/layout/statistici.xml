@@ -93,7 +93,7 @@
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.535" />
+            app:layout_constraintVertical_bias="0.523" />
 
         <View
             android:id="@+id/view16"
@@ -112,7 +112,7 @@
             android:layout_width="350dp"
             android:layout_height="47dp"
             android:fontFamily="@font/extra_bold"
-            android:text="Sugestii de economisire"
+            android:text="Sugestii"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"

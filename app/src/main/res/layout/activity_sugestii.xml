@@ -1,0 +1,192 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Sugestii">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- View 1 -->
+
+        <!-- View 2 -->
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="373dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/corner_layout"
+            android:backgroundTint="#E42727"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.421"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Adaugă margină de 8dp între view1 și view2 -->
+
+        <!-- View 3 -->
+        <View
+            android:id="@+id/view2"
+            android:layout_width="373dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/corner_layout"
+            android:backgroundTint="#E42727"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.421"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+        <!-- Adaugă margină de 8dp între view2 și view3 -->
+
+        <!-- View 4 -->
+        <View
+            android:id="@+id/view3"
+            android:layout_width="373dp"
+            android:layout_height="125dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/corner_layout"
+            android:backgroundTint="#E42727"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.421"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <!-- Adaugă margină de 8dp între view3 și view4 -->
+
+        <!-- View 5 -->
+        <View
+            android:id="@+id/view4"
+            android:layout_width="371dp"
+            android:layout_height="142dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/corner_layout"
+            android:backgroundTint="#477314"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.421"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+        <!-- Adaugă margină de 8dp între view4 și view5 -->
+
+        <!-- View 6 -->
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="370dp"
+            android:layout_height="145dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/corner_layout"
+            android:backgroundTint="#477314"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.39"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="362dp"
+            android:layout_height="127dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/corner_layout"
+            android:backgroundTint="#477314"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view5"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="361dp"
+            android:layout_height="105dp"
+            android:fontFamily="@font/italic"
+            android:text="Fondul de rezerva reprezinta o suma de bani pe care o detii in locuinta pentru diverse urgente ( o reparatie in casa , o vizita medicala , etc.) . Suma ar trebui sa fie in jurul unui salariu pe o luna. Tine cont de acest sfat!"
+            android:textColor="#F1F1F1"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view1"
+            app:layout_constraintEnd_toEndOf="@+id/view1"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="@+id/view1"
+            app:layout_constraintTop_toTopOf="@+id/view1"
+            app:layout_constraintVertical_bias="0.555" />
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="352dp"
+            android:layout_height="104dp"
+            android:fontFamily="@font/italic"
+            android:text="Fondul de siguranta reprezinta venitul tau pe minim 3 luni . Acesta iti ofera un confort in cazul unei probleme mai grave : pierderea jobului , probleme de sanatate care te impiedica sa lucrezi,etc. "
+            android:textColor="#FDFDFD"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view2"
+            app:layout_constraintEnd_toEndOf="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/view2"
+            app:layout_constraintTop_toTopOf="@+id/view2" />
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="344dp"
+            android:layout_height="90dp"
+            android:fontFamily="@font/italic"
+            android:text="Planifica-ti foarte atent bugetul ! Foloseste functiile aplicatiei pentru a vizualiza cheltuielile si veniturile tale ! Imparte-ti cheltuielile cu maxima atentie!"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view3"
+            app:layout_constraintEnd_toEndOf="@+id/view3"
+            app:layout_constraintHorizontal_bias="0.533"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view3"
+            app:layout_constraintVertical_bias="0.542" />
+
+        <TextView
+            android:id="@+id/textView43"
+            android:layout_width="359dp"
+            android:layout_height="127dp"
+            android:fontFamily="@font/italic"
+            android:text="Sugestie de economisire: Cumparaturile ne mananca o mare parte din resursele noastre. Plateste intotdeauna cash in loc de card ! Studiile arata ca cei care platesc cash voi cumpara lucruri mai calitative si se vor incadra in bugetul alocat. "
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view4"
+            app:layout_constraintEnd_toEndOf="@+id/view4"
+            app:layout_constraintStart_toStartOf="@+id/view4"
+            app:layout_constraintTop_toTopOf="@+id/view4" />
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="359dp"
+            android:layout_height="133dp"
+            android:fontFamily="@font/italic"
+            android:text="Sugestie de economisire: Cheltuielile cu transportul nu ar trebui sa depaseasca 5% diin veniturile unei persoane pe o luna . Un automobil nu ar trebui sa depaseasca valoarea pe 6 luni de venit. Economiseste inteligent in active si nu in pasive."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view5"
+            app:layout_constraintEnd_toEndOf="@+id/view5"
+            app:layout_constraintHorizontal_bias="0.909"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/view5"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/textView45"
+            android:layout_width="330dp"
+            android:layout_height="93dp"
+            android:fontFamily="@font/italic"
+            android:text="Sfat de economisire:  Plateste-te intai pe tine , apo pe ceilalti ! Niciodata invers."
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view6"
+            app:layout_constraintEnd_toEndOf="@+id/view6"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toStartOf="@+id/view6"
+            app:layout_constraintTop_toTopOf="@+id/view6"
+            app:layout_constraintVertical_bias="0.611" /> <!-- Adaugă margină de 8dp între view5 și view6 -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
