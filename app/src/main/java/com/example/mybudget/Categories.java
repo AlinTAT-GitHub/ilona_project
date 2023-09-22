@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -71,6 +72,12 @@ public class Categories extends AppCompatActivity {
         inputCategoryName.setHint("Numele categoriei");
         layout.addView(inputCategoryName);
 
+        // Crearea unui EditText pentru suma limită
+        final EditText inputCategoryLimit = new EditText(this);
+        inputCategoryLimit.setHint("Suma limită pentru această categorie (luna)");
+        inputCategoryLimit.setInputType(InputType.TYPE_CLASS_NUMBER); // Setare pentru a accepta numere
+        layout.addView(inputCategoryLimit);
+
         // Crearea unui AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Adăugare Categorie");
@@ -81,8 +88,9 @@ public class Categories extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String categoryName = inputCategoryName.getText().toString().trim();
+                String categoryLimit=inputCategoryLimit.getText().toString().trim();
                 if (!categoryName.isEmpty()) {
-                    addCategoryToFirestore(categoryName);
+                    addCategoryToFirestore(categoryName,categoryLimit);
                     dialog.dismiss();
                 } else {
                     Toast.makeText(Categories.this, "Introduceți numele categoriei", Toast.LENGTH_SHORT).show();
@@ -100,10 +108,11 @@ public class Categories extends AppCompatActivity {
         builder.show();
     }
 
-    private void addCategoryToFirestore(String categoryName) {
+    private void addCategoryToFirestore(String categoryName,String categoryLimit) {
         String uid = mAuth.getCurrentUser().getUid();
         Map<String, Object> category = new HashMap<>();
         category.put("Nume categorie", categoryName);
+        category.put("Suma limita", categoryLimit);
         category.put("uid", uid);
 
         db.collection("Categorii")
@@ -122,5 +131,3 @@ public class Categories extends AppCompatActivity {
                 });
     }
 }
-
-
