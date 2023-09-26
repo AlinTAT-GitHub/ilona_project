@@ -15,6 +15,8 @@ public class Statistics extends AppCompatActivity {
 
     View warning;
 
+    View membrii;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,7 @@ public class Statistics extends AppCompatActivity {
         sugestii=findViewById(R.id.view16);
         variatii=findViewById(R.id.view17);
         warning=findViewById(R.id.view18);
+        membrii=findViewById(R.id.view20);
 
         balanta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +61,13 @@ public class Statistics extends AppCompatActivity {
             }
         });
 
+        membrii.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Statistics.this,StatisticiMembrii.class);
+                startActivity(intent);
+            }
+        });
 
 
     }
