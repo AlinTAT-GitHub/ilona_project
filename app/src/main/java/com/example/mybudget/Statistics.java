@@ -13,6 +13,8 @@ public class Statistics extends AppCompatActivity {
 
     View variatii;
 
+    View warning;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +23,7 @@ public class Statistics extends AppCompatActivity {
         balanta=findViewById(R.id.view5);
         sugestii=findViewById(R.id.view16);
         variatii=findViewById(R.id.view17);
+        warning=findViewById(R.id.view18);
 
         balanta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +49,15 @@ public class Statistics extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        warning.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Statistics.this, Warning.class);
+                startActivity(intent);
+            }
+        });
+
 
 
     }
