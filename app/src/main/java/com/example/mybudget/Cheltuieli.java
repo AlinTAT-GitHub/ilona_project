@@ -13,10 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -34,6 +31,8 @@ public class Cheltuieli extends AppCompatActivity {
     private View cheltuielile_mele;
     private View membrii;
 
+    private View factura;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +41,7 @@ public class Cheltuieli extends AppCompatActivity {
         cheltuieli_pe_categorii = findViewById(R.id.view10);
         cheltuielile_mele = findViewById(R.id.view15);
         membrii = findViewById(R.id.view13);
+        factura=findViewById(R.id.view14);
 
         cheltuieli_pe_categorii.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +65,14 @@ public class Cheltuieli extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Cheltuieli.this, Cheltuieli_Membrii.class);
+                startActivity(intent);
+            }
+        });
+
+        factura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(Cheltuieli.this,ScanareFactura.class);
                 startActivity(intent);
             }
         });
