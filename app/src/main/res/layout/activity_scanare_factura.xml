@@ -10,11 +10,21 @@
     tools:context=".ScanareFactura">
 
    <Button
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:text="Scaneaza"
-       android:layout_centerInParent="true"
        android:id="@+id/btn_scan"
-       />
+       android:layout_width="209dp"
+       android:layout_height="103dp"
+       android:layout_alignParentStart="true"
+       android:layout_alignParentTop="true"
+       android:layout_alignParentEnd="true"
+       android:layout_alignParentBottom="true"
+       android:layout_marginStart="89dp"
+       android:layout_marginTop="282dp"
+       android:layout_marginEnd="97dp"
+       android:layout_marginBottom="330dp"
+       android:background="@drawable/corner_layout"
+       android:backgroundTint="@color/background"
+       android:text="Scaneaza codul de bare"
+       android:textColor="#FFFFFF"
+       android:textSize="20sp" />
 
 </RelativeLayout>
